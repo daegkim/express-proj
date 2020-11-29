@@ -1,9 +1,6 @@
 const mongoose = require('mongoose')
 const account = require('./accountSchema')
 
-/*
-This it for mongoose connection test & practice for CRUD
-*/
 class AccountDB {
   accountDB() {
     mongoose.Promise = global.Promise
@@ -24,15 +21,18 @@ class AccountDB {
         }
         if(res !== null) {
           resolve('exi$tID')
+          mongoose.disconnect()
           return
         }
 
         account.create(newAccount, (err) => {
           if (err) {
             console.log(err)
+            mongoose.disconnect()
             throw err
           }
           resolve(null)
+          mongoose.disconnect()
         })
       })
     })
@@ -51,6 +51,7 @@ class AccountDB {
 
         if(resId === null) {
           resolve({userId: null, error: 'userId'})
+          mongoose.disconnect()
           return
         }
 
@@ -63,6 +64,7 @@ class AccountDB {
 
           if(resIdPwd === null) {
             resolve({userId: null, error: 'userPwd'})
+            mongoose.disconnect()
             return
           }
   
