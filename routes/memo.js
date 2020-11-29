@@ -25,4 +25,22 @@ router.post('/createMemo', function(req, res, next) {
   })
 })
 
+router.post('/updateMemo', function(req, res, next) {
+  if(Array.isArray(req.body)){
+    for(let i of req.body){
+      memoDB.updateMemo(i)
+      .then(function(result) {
+      })
+    }
+    res.send('success')
+  }
+  else{
+    memoDB.updateMemo(req.body)
+    .then(function(result) {
+      var jsonStr = JSON.stringify(result)
+      res.send(jsonStr)
+    })
+  }
+})
+
 module.exports = router;
