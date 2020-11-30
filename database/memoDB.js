@@ -66,6 +66,40 @@ class MemoDB {
       })
     })
   }
+
+  deleteMemo = function(trgtMemo) {
+    return new Promise((resolve, reject) => {
+      mongoose.connect('mongodb://localhost:27017/memoApp', { useNewUrlParser: true }, (err) => { if (err) console.log(err) })
+      if(trgtMemo.memoId === null){
+        memo.updateMany({}, {
+          delFlag: true
+        })
+        .then(function(res) {
+          resolve(res)
+        })
+        .catch(function(exception) {
+          console.log(exception)
+        }) 
+        .finally(() => {
+          mongoose.disconnect()
+        })
+      }
+      else {
+        memo.updateOne({memoId: trgtMemo.memoId}, {
+          delFlag: true,
+        })
+        .then(function(res) {
+          resolve(res)
+        })
+        .catch(function(exception) {
+          console.log(exception)
+        }) 
+        .finally(() => {
+          mongoose.disconnect()
+        })       
+      }
+    })
+  }
 }
 
 module.exports = new MemoDB()

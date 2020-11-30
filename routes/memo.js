@@ -43,4 +43,12 @@ router.post('/updateMemo', function(req, res, next) {
   }
 })
 
+router.post('/deleteMemo', function(req, res, next) {
+  memoDB.deleteMemo(req.body)
+  .then(function(result) {
+    var jsonStr = JSON.stringify(result)
+    res.send(jsonStr)
+  })
+})
+
 module.exports = router;
