@@ -5,11 +5,11 @@ module.exports = {
       script: './bin/www',
       watch: true,
       env: {
-        'NODE_ENV': 'development',
-        'PORT': 4000
+        'NODE_ENV': 'development'
       },
       env_production: {
-        'NODE_ENV': 'production'
+        'NODE_ENV': 'production',
+        PORT: 4000
       }
     }
   ]
