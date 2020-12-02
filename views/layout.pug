@@ -2,10 +2,16 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width', initial-scale=1)
+    meta(name='viewport', content='width=device-width', initial-scale=1, maximum-scale=1)
     link(rel='shortcut icon', href='/images/favicon-pencil.ico', type='image/x-icon')
     link(rel="icon", href='/images/favicon-pencil.ico', type='image/x-icon')
 
     title= title
   body
     block content
+    script.
+      window.onload = function() {
+        window.addEventListener('touchmove', function(e) {
+          e.preventDefault()
+        }, {passive: false})
+      }
